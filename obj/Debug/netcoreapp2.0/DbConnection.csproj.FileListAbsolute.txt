@@ -1,0 +1,10 @@
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\obj\Debug\netcoreapp2.0\DbConnection.csproj.CoreCompileInputs.cache
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\obj\Debug\netcoreapp2.0\DbConnection.AssemblyInfoInputs.cache
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\obj\Debug\netcoreapp2.0\DbConnection.AssemblyInfo.cs
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\bin\Debug\netcoreapp2.0\DbConnection.deps.json
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\bin\Debug\netcoreapp2.0\DbConnection.runtimeconfig.json
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\bin\Debug\netcoreapp2.0\DbConnection.runtimeconfig.dev.json
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\bin\Debug\netcoreapp2.0\DbConnection.dll
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\bin\Debug\netcoreapp2.0\DbConnection.pdb
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\obj\Debug\netcoreapp2.0\DbConnection.dll
+C:\Users\Bruno\Documents\dev\asp.net\DbConnection\DbConnection\obj\Debug\netcoreapp2.0\DbConnection.pdb
