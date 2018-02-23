@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using DbConnection.Infraestructure;
+using DbConnection.Infrastructure;
 using MySql.Data.MySqlClient;
 
 namespace DbConnection.Repository

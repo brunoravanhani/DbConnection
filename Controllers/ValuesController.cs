@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DbConnection.Infraestructure;
+using DbConnection.Infrastructure;
 using DbConnection.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,19 +12,20 @@ namespace DbConnection.Controllers
     public class ValuesController : Controller
     {
         
-        private readonly ValuesMySqlRepository repository;
+        private readonly ValuesMySqlRepository Repository;
+        private readonly MySqlContext Context;
 
-        public ValuesController() 
+        public ValuesController(IMySqlContext context) 
         {
-            MySqlContext context = new MySqlContext("server=localhost;port=3306;database=db_test;user=root;password=ravanhani");
-            repository = new ValuesMySqlRepository(context);
+            Context = context as MySqlContext;
+            Repository = new ValuesMySqlRepository(Context);
         }
 
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return repository.Get();
+            return Repository.Get();
         }
 
         // GET api/values/5

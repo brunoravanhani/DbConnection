@@ -1,9 +1,9 @@
 using System;
 using MySql.Data.MySqlClient;
 
-namespace DbConnection.Infraestructure
+namespace DbConnection.Infrastructure
 {
-    public class MySqlContext
+    public class MySqlContext : IMySqlContext
     {
         
         public string ConnectionString { get; set; }

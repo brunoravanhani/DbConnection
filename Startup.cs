@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DbConnection.Infraestructure;
+using DbConnection.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,9 +14,13 @@ namespace DbConnection
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var build = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional:false, reloadOnChange:true);
+
+            Configuration = build.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -25,6 +29,7 @@ namespace DbConnection
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.Add(new ServiceDescriptor(typeof(IMySqlContext), new MySqlContext(Configuration.GetConnectionString("MySqlLocalConnectionString"))));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
