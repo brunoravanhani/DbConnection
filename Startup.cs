@@ -29,7 +29,7 @@ namespace DbConnection
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.Add(new ServiceDescriptor(typeof(IMySqlContext), new MySqlContext(Configuration.GetConnectionString("MySqlLocalConnectionString"))));
+            services.Add(new ServiceDescriptor(typeof(IMySqlContext), new MySqlContext(Configuration.GetConnectionString("MySqlServerConnectionString"))));
             services.Add(new ServiceDescriptor(typeof(IPostgresContext), new PostgresContext(Configuration.GetConnectionString("PostgresSqlServerConnectionString"))));
         }
 
