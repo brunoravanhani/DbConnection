@@ -6,7 +6,7 @@ namespace DbConnection.Infrastructure
     public class MySqlContext : IMySqlContext
     {
         
-        public string ConnectionString { get; set; }
+        private string ConnectionString { get; set; }
 
         public MySqlContext(String connectionString)
         {

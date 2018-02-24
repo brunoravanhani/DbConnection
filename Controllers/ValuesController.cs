@@ -12,45 +12,33 @@ namespace DbConnection.Controllers
     public class ValuesController : Controller
     {
         
-        private readonly ValuesMySqlRepository Repository;
-        private readonly MySqlContext Context;
+        private readonly ValuesMySqlRepository MySqlRepository;
+        private readonly ValuesPostgresRepository PostgresRepository;
+        private readonly MySqlContext MySqlContext;
+        private readonly PostgresContext PostgresContext;
 
-        public ValuesController(IMySqlContext context) 
+        public ValuesController(IMySqlContext mySqlcontext, IPostgresContext postgresContext) 
         {
-            Context = context as MySqlContext;
-            Repository = new ValuesMySqlRepository(Context);
+            MySqlContext = mySqlcontext as MySqlContext;
+            PostgresContext = postgresContext as PostgresContext;
+            MySqlRepository = new ValuesMySqlRepository(MySqlContext);
+            PostgresRepository = new ValuesPostgresRepository(PostgresContext);
         }
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("MySql")]
+        public IEnumerable<string> MySql()
         {
-            return Repository.Get();
+            return MySqlRepository.Get();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("Postgresql")]
+        public IEnumerable<string> PostgreSql()
         {
-            return "value";
+            return PostgresRepository.Get();
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
