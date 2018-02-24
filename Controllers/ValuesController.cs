@@ -14,15 +14,20 @@ namespace DbConnection.Controllers
         
         private readonly ValuesMySqlRepository MySqlRepository;
         private readonly ValuesPostgresRepository PostgresRepository;
+        private readonly ValuesSqlServerRepository SqlServerRepository;
         private readonly MySqlContext MySqlContext;
         private readonly PostgresContext PostgresContext;
+        private readonly SqlServerContext SqlServerContext;
 
-        public ValuesController(IMySqlContext mySqlcontext, IPostgresContext postgresContext) 
+        public ValuesController(IMySqlContext mySqlcontext, IPostgresContext postgresContext, 
+                                ISqlServerContext sqlServerContext) 
         {
             MySqlContext = mySqlcontext as MySqlContext;
             PostgresContext = postgresContext as PostgresContext;
+            SqlServerContext = sqlServerContext as SqlServerContext;
             MySqlRepository = new ValuesMySqlRepository(MySqlContext);
             PostgresRepository = new ValuesPostgresRepository(PostgresContext);
+            SqlServerRepository = new ValuesSqlServerRepository(SqlServerContext);
         }
 
         // GET api/values
@@ -39,6 +44,14 @@ namespace DbConnection.Controllers
         {
             return PostgresRepository.Get();
         }
+
+        [HttpGet]
+        [Route("SqlServer")]
+        public IEnumerable<string> SqlServer()
+        {
+            return SqlServerRepository.Get();
+        }
+
 
     }
 }

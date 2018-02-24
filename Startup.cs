@@ -31,6 +31,7 @@ namespace DbConnection
             services.AddMvc();
             services.Add(new ServiceDescriptor(typeof(IMySqlContext), new MySqlContext(Configuration.GetConnectionString("MySqlServerConnectionString"))));
             services.Add(new ServiceDescriptor(typeof(IPostgresContext), new PostgresContext(Configuration.GetConnectionString("PostgresSqlServerConnectionString"))));
+            services.Add(new ServiceDescriptor(typeof(ISqlServerContext), new SqlServerContext(Configuration.GetConnectionString("SqlServerConnectionString"))));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
