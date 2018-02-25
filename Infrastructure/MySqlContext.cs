@@ -1,11 +1,11 @@
 using System;
+using System.Data;
 using MySql.Data.MySqlClient;
 
 namespace DbConnection.Infrastructure
 {
     public class MySqlContext : IMySqlContext
     {
-        
         private string ConnectionString { get; set; }
 
         public MySqlContext(String connectionString)
@@ -13,7 +13,7 @@ namespace DbConnection.Infrastructure
             this.ConnectionString = connectionString;
         }
 
-        public MySqlConnection GetConnection () 
+        public IDbConnection GetConnection () 
         {
             return new MySqlConnection(ConnectionString);
         }

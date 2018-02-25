@@ -1,11 +1,11 @@
 using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace DbConnection.Infrastructure
 {
     public class SqlServerContext : ISqlServerContext
     {
-
         private String ConnectionString;
 
         public SqlServerContext(String connectionString)
@@ -13,7 +13,7 @@ namespace DbConnection.Infrastructure
             this.ConnectionString = connectionString;
         }
 
-        public SqlConnection GetConnection()
+        public IDbConnection GetConnection()
         {
             return new SqlConnection(ConnectionString);
         }
