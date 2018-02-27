@@ -7,8 +7,6 @@ namespace DbConnection.Repository
     public interface IRepository<TEntity, TId>
     {
 
-        IContext Context { get; set; }
-
         TEntity Get(TId id);
         
         IEnumerable<TEntity> GetAll();

@@ -16,7 +16,7 @@ namespace DbConnection.Repository
             this.Context = context;
         }
 
-        public IContext Context { get; set; }
+        private IContext Context { get; set; }
 
         public bool Add(User entity)
         {
