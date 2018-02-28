@@ -20,17 +20,81 @@ namespace DbConnection.Repository
 
         public bool Add(User entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection)
+            {
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand($"INSERT INTO USER (NAME) VALUES('{entity.Name}')", connection);
+
+                var queryResult = command.ExecuteNonQuery();
+                
+                result = queryResult != -1;
+            }
+
+            return result;
+        }
+
+        public bool Update(User entity)
+        {
+            bool result = false;
+
+            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection)
+            {
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand($"UPDATE USER SET NAME = '{entity.Name}' WHERE ID_USER = {entity.Id})", connection);
+
+                var queryResult = command.ExecuteNonQuery();
+                
+                result = queryResult != -1;
+            }
+
+            return result;
         }
 
         public bool Delete(long id)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection)
+            {
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand($"DELETE FROM USER WHERE ID_USER = {id})", connection);
+
+                var queryResult = command.ExecuteNonQuery();
+                
+                result = queryResult != -1;
+            }
+
+            return result;
         }
 
         public User Get(long id)
         {
-            throw new NotImplementedException();
+            User user = null;
+            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection) 
+            {
+                connection.Open();
+
+                DbCommand command = new MySqlCommand($"SELECT * FROM USER WHERE ID_USER = {id}", connection);
+                
+                using(var reader = command.ExecuteReader()) 
+                {
+                    while(reader.Read())
+                    {
+                        user = new User {
+                            Id = Int64.Parse(reader["ID_USER"].ToString()),
+                            Name = reader["NAME"].ToString()
+                        };
+                    }
+                }
+
+                connection.Close();
+                return user;
+            }
         }
 
         public IEnumerable<User> GetAll () {
@@ -40,7 +104,7 @@ namespace DbConnection.Repository
             {
                 connection.Open();
 
-                DbCommand command = new MySqlCommand("SELECT * FROM user", connection);
+                DbCommand command = new MySqlCommand("SELECT * FROM USER", connection);
                 
                 using(var reader = command.ExecuteReader()) 
                 {
@@ -57,10 +121,6 @@ namespace DbConnection.Repository
                 return items;
             }
         }
-
-        public bool Update(User entity)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
