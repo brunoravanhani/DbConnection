@@ -22,15 +22,15 @@ namespace DbConnection.Repository
         {
             bool result = false;
 
-            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection)
+            using (IDbConnection connection = Context.GetConnection())
             {
                 connection.Open();
 
-                MySqlCommand command = new MySqlCommand($"INSERT INTO USER (NAME) VALUES('{entity.Name}')", connection);
+                IDbCommand command = Context.GetCommand($"INSERT INTO USER (NAME) VALUES('{entity.Name}')", connection);
 
                 var queryResult = command.ExecuteNonQuery();
                 
-                result = queryResult != -1;
+                result = queryResult > 0;
             }
 
             return result;
@@ -40,15 +40,15 @@ namespace DbConnection.Repository
         {
             bool result = false;
 
-            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection)
+            using (IDbConnection connection = Context.GetConnection())
             {
                 connection.Open();
 
-                MySqlCommand command = new MySqlCommand($"UPDATE USER SET NAME = '{entity.Name}' WHERE ID_USER = {entity.Id}", connection);
+                IDbCommand command = Context.GetCommand($"UPDATE USER SET NAME = '{entity.Name}' WHERE ID_USER = {entity.Id}", connection);
 
                 var queryResult = command.ExecuteNonQuery();
                 
-                result = queryResult != -1;
+                result = queryResult > 0;
             }
 
             return result;
@@ -58,15 +58,15 @@ namespace DbConnection.Repository
         {
             bool result = false;
 
-            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection)
+            using (IDbConnection connection = Context.GetConnection())
             {
                 connection.Open();
 
-                MySqlCommand command = new MySqlCommand($"DELETE FROM USER WHERE ID_USER = {id}", connection);
+                IDbCommand command = Context.GetCommand($"DELETE FROM USER WHERE ID_USER = {id}", connection);
 
                 var queryResult = command.ExecuteNonQuery();
                 
-                result = queryResult != -1;
+                result = queryResult > 0;
             }
 
             return result;
@@ -75,11 +75,11 @@ namespace DbConnection.Repository
         public User Get(long id)
         {
             User user = null;
-            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection) 
+            using (IDbConnection connection = Context.GetConnection()) 
             {
                 connection.Open();
 
-                DbCommand command = new MySqlCommand($"SELECT * FROM USER WHERE ID_USER = {id}", connection);
+                IDbCommand command = Context.GetCommand($"SELECT * FROM USER WHERE ID_USER = {id}", connection);
                 
                 using(var reader = command.ExecuteReader()) 
                 {
@@ -100,11 +100,11 @@ namespace DbConnection.Repository
         public IEnumerable<User> GetAll () {
 
             List<User> items = new List<User>();
-            using (MySqlConnection connection = Context.GetConnection() as MySqlConnection) 
+            using (IDbConnection connection = Context.GetConnection()) 
             {
                 connection.Open();
 
-                DbCommand command = new MySqlCommand("SELECT * FROM USER", connection);
+                IDbCommand command = Context.GetCommand("SELECT * FROM USER", connection);
                 
                 using(var reader = command.ExecuteReader()) 
                 {
