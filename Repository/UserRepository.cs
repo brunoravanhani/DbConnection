@@ -44,7 +44,7 @@ namespace DbConnection.Repository
             {
                 connection.Open();
 
-                MySqlCommand command = new MySqlCommand($"UPDATE USER SET NAME = '{entity.Name}' WHERE ID_USER = {entity.Id})", connection);
+                MySqlCommand command = new MySqlCommand($"UPDATE USER SET NAME = '{entity.Name}' WHERE ID_USER = {entity.Id}", connection);
 
                 var queryResult = command.ExecuteNonQuery();
                 
@@ -62,7 +62,7 @@ namespace DbConnection.Repository
             {
                 connection.Open();
 
-                MySqlCommand command = new MySqlCommand($"DELETE FROM USER WHERE ID_USER = {id})", connection);
+                MySqlCommand command = new MySqlCommand($"DELETE FROM USER WHERE ID_USER = {id}", connection);
 
                 var queryResult = command.ExecuteNonQuery();
                 
