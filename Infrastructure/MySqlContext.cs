@@ -17,5 +17,10 @@ namespace DbConnection.Infrastructure
         {
             return new MySqlConnection(ConnectionString);
         }
+
+        public IDbCommand GetCommand(string sql, IDbConnection connection)
+        {
+            return new MySqlCommand(sql, connection as MySqlConnection);
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace DbConnection.Infrastructure
         {
             return new NpgsqlConnection(ConnectionString);
         }
+
+        public IDbCommand GetCommand(string sql, IDbConnection connection)
+        {
+            return new NpgsqlCommand(sql, connection as NpgsqlConnection);
+        }
     }
 }
