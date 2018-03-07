@@ -12,14 +12,14 @@ namespace DbConnection.Controllers
     [Route("api/[controller]")]
     public class UserController : ApiController<User, Int64>
     {
-        
-        private readonly MySqlContext MySqlContext;
 
-        public UserController(IMySqlContext mySqlcontext) 
+        public UserController(IMySqlContext context) 
         {
-            MySqlContext = mySqlcontext as MySqlContext;
-            Repository = new UserRepository(MySqlContext);
+            this.Context = context as MySqlContext;
+            Repository = new UserRepository(Context);
         }
+
+        private readonly IContext Context;
 
     }
 }

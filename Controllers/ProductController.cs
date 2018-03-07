@@ -10,13 +10,13 @@ namespace DbConnection.Controllers
     public class ProductController : ApiController<Product, Int64>
     {
         
-        public ProductController(ISqlServerContext context)
+        public ProductController(IMySqlContext context)
         {
-            this.Context = context as SqlServerContext  ;
+            this.Context = context as MySqlContext;
             Repository = new ProductRepository(Context);
         }
 
-        private readonly SqlServerContext Context;
+        private readonly IContext Context;
 
     }
 }

@@ -11,7 +11,7 @@ namespace DbConnection.Repository
     public class ProductRepository : IRepository<Product, Int64>
     {
 
-        public ProductRepository(SqlServerContext context)
+        public ProductRepository(IContext context)
         {
             this.Context = context;
         }
@@ -26,7 +26,7 @@ namespace DbConnection.Repository
                 connection.Open();
                 
                 IDbCommand command = Context.GetCommand(
-                    $"INSERT INTO PRODUCT (DESCRIPTION, PRICE) VALUES ('{entity.Description}', {entity.Price})", connection);
+                    $"INSERT INTO PRODUTO (DESCRICAO, PRICE) VALUES ('{entity.Description}', {entity.Price})", connection);
                 
                 var queryResult = command.ExecuteNonQuery();
 
@@ -43,7 +43,7 @@ namespace DbConnection.Repository
                 connection.Open();
                 
                 IDbCommand command = Context.GetCommand(
-                    $"DELETE FROM PRODUCT WHERE ID_PRODUCT = {id}", connection);
+                    $"DELETE FROM PRODUTO WHERE ID_PRODUTO = {id}", connection);
                 
                 var queryResult = command.ExecuteNonQuery();
 
@@ -60,7 +60,7 @@ namespace DbConnection.Repository
             {
                 connection.Open();
                 
-                IDbCommand command = Context.GetCommand($"SELECT ID_PRODUCT,DESCRIPTION,PRICE FROM PRODUCT WHERE ID_PRODUCT = {id}", connection);
+                IDbCommand command = Context.GetCommand($"SELECT ID_PRODUTO,DESCRICAO,PRICE FROM PRODUTO WHERE ID_PRODUTO = {id}", connection);
                 
                 using(var reader = command.ExecuteReader()) 
                 {
@@ -68,8 +68,8 @@ namespace DbConnection.Repository
                     {
                         product = new Product
                         {
-                            Id = Int64.Parse(reader["ID_PRODUCT"].ToString()),
-                            Description = reader["DESCRIPTION"].ToString(),
+                            Id = Int64.Parse(reader["ID_PRODUTO"].ToString()),
+                            Description = reader["DESCRICAO"].ToString(),
                             Price = Double.Parse(reader["PRICE"].ToString())
                         };
                     }
@@ -86,7 +86,7 @@ namespace DbConnection.Repository
             {
                 connection.Open();
                 
-                IDbCommand command = Context.GetCommand("SELECT ID_PRODUCT,DESCRIPTION,PRICE FROM PRODUCT", connection);
+                IDbCommand command = Context.GetCommand("SELECT ID_PRODUTO,DESCRICAO,PRICE FROM PRODUTO", connection);
                 
                 using(var reader = command.ExecuteReader()) 
                 {
@@ -94,8 +94,8 @@ namespace DbConnection.Repository
                     {
                         items.Add(new Product
                         {
-                            Id = Int64.Parse(reader["ID_PRODUCT"].ToString()),
-                            Description = reader["DESCRIPTION"].ToString(),
+                            Id = Int64.Parse(reader["ID_PRODUTO"].ToString()),
+                            Description = reader["DESCRICAO"].ToString(),
                             Price = Double.Parse(reader["PRICE"].ToString())
                         });
                     }
@@ -113,8 +113,8 @@ namespace DbConnection.Repository
                 connection.Open();
                 
                 IDbCommand command = Context.GetCommand(
-                    $@"UPDATE PRODUCT SET DESCRIPTION = '{entity.Description}', PRICE = {entity} 
-                        WHERE ID_PRODUCT = {entity.Id}", connection);
+                    $@"UPDATE PRODUTO SET DESCRICAO = '{entity.Description}', PRICE = {entity} 
+                        WHERE ID_PRODUTO = {entity.Id}", connection);
                 
                 var queryResult = command.ExecuteNonQuery();
 

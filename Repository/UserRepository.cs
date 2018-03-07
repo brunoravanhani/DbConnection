@@ -11,7 +11,7 @@ namespace DbConnection.Repository
     public class UserRepository : IRepository<User, long>
     {
 
-        public UserRepository(MySqlContext context)
+        public UserRepository(IContext context)
         {
             this.Context = context;
         }
@@ -26,7 +26,7 @@ namespace DbConnection.Repository
             {
                 connection.Open();
 
-                IDbCommand command = Context.GetCommand($"INSERT INTO USER (NAME) VALUES('{entity.Name}')", connection);
+                IDbCommand command = Context.GetCommand($"INSERT INTO USUARIO (NOME) VALUES('{entity.Name}')", connection);
 
                 var queryResult = command.ExecuteNonQuery();
                 
@@ -44,7 +44,7 @@ namespace DbConnection.Repository
             {
                 connection.Open();
 
-                IDbCommand command = Context.GetCommand($"UPDATE USER SET NAME = '{entity.Name}' WHERE ID_USER = {entity.Id}", connection);
+                IDbCommand command = Context.GetCommand($"UPDATE USUARIO SET NOME = '{entity.Name}' WHERE ID_USUARIO = {entity.Id}", connection);
 
                 var queryResult = command.ExecuteNonQuery();
                 
@@ -62,7 +62,7 @@ namespace DbConnection.Repository
             {
                 connection.Open();
 
-                IDbCommand command = Context.GetCommand($"DELETE FROM USER WHERE ID_USER = {id}", connection);
+                IDbCommand command = Context.GetCommand($"DELETE FROM USUARIO WHERE ID_USUARIO = {id}", connection);
 
                 var queryResult = command.ExecuteNonQuery();
                 
@@ -79,15 +79,15 @@ namespace DbConnection.Repository
             {
                 connection.Open();
 
-                IDbCommand command = Context.GetCommand($"SELECT * FROM USER WHERE ID_USER = {id}", connection);
+                IDbCommand command = Context.GetCommand($"SELECT * FROM USUARIO WHERE ID_USUARIO = {id}", connection);
                 
                 using(var reader = command.ExecuteReader()) 
                 {
                     while(reader.Read())
                     {
                         user = new User {
-                            Id = Int64.Parse(reader["ID_USER"].ToString()),
-                            Name = reader["NAME"].ToString()
+                            Id = Int64.Parse(reader["ID_USUARIO"].ToString()),
+                            Name = reader["NOME"].ToString()
                         };
                     }
                 }
@@ -104,15 +104,15 @@ namespace DbConnection.Repository
             {
                 connection.Open();
 
-                IDbCommand command = Context.GetCommand("SELECT * FROM USER", connection);
+                IDbCommand command = Context.GetCommand("SELECT * FROM USUARIO", connection);
                 
                 using(var reader = command.ExecuteReader()) 
                 {
                     while(reader.Read())
                     {
                         items.Add(new User {
-                            Id = Int64.Parse(reader["ID_USER"].ToString()),
-                            Name = reader["NAME"].ToString()
+                            Id = Int64.Parse(reader["ID_USUARIO"].ToString()),
+                            Name = reader["NOME"].ToString()
                         });
                     }
                 }
